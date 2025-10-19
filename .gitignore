@@ -1,0 +1,55 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+log/
+*.log*
+logs/*
+
+# Database
+*.sqlite
+db.sqlite3
+*.db
+
+# Build files
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# VSCode settings
+.vscode/
+
+# macOS files
+.DS_Store
+
+# Linux files
+*.pid
+
+# Windows files
+Thumbs.db
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Debugging
+debug.log
+
+# API Testing
+*.http
+*.rest
