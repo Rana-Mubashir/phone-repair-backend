@@ -23,7 +23,7 @@ app.use('/api/repairoptions',repairOptionsRouter)
 
 app.use('/', (req, res) => {
     return res.status(200).json({
-        message: "Server is working horray!!!!"
+        message: "Server is working!!!!"
     })
 })
 
