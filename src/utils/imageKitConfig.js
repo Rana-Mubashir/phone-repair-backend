@@ -1,9 +1,12 @@
 const ImageKit=require('imagekit')
+const {config}=require('dotenv')
+
+config()
 
 const imagekit = new ImageKit({
-    publicKey: "public_20ITZdPiFFUw4PT54pI8C9K3P80=",  // Replace with your actual public key
-    privateKey: "private_xvzkDyxX3WIsG1X3iwNO7jkqUgM=", // Replace with your actual private key
-    urlEndpoint: "https://imagekit.io/lksjdf7sd/" // Replace with your ImageKit URL endpoint
+    publicKey:process.env.IMAGEKIT_PUBLIC_KEY,
+    privateKey:process.env.IMAGEKIT_PRIVATE_KEY,
+    urlEndpoint:process.env.IMAGEKIT_URL_ENDPOINT
 });
 
 module.exports=imagekit;
