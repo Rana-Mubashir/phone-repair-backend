@@ -157,7 +157,6 @@ async function getRepairOptions(req, res) {
     }
 }
 
-
 async function getDeviceRepairOptions(req, res) {
     try {
         const { id } = req.params;
@@ -199,5 +198,69 @@ async function getDeviceRepairOptions(req, res) {
     }
 }
 
+async function getRepairOptionWithDevice(req, res) {
+    try {
+        const { id } = req.params;
 
-module.exports = { create, remove, getRepairOptions, getDeviceRepairOptions, update }
+        const data = await RepairOptions.aggregate([
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(id)
+                }
+            },
+            {
+                $lookup: {
+                    from: "devices", // collection name in DB
+                    localField: "deviceId",
+                    foreignField: "_id",
+                    as: "device"
+                }
+            },
+            {
+                $unwind: "$device" // convert array to object
+            },
+            {
+                $project: {
+                    name: 1,
+                    description: 1,
+                    image: 1,
+                    price: 1,
+                    estimatedTime: 1,
+                    warranty: 1,
+                    device: {
+                        _id: 1,
+                        name: 1,
+                        image: 1
+                    }
+                }
+            }
+        ]);
+
+        if (!data.length) {
+            return res.status(404).json({
+                message: "Repair option not found"
+            });
+        }
+
+        return res.status(200).json({
+            message: "Repair option with device found successfully",
+            data: data[0]
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Internal server error",
+            error: error.message
+        });
+    }
+}
+
+
+module.exports = {
+    create,
+    remove,
+    getRepairOptions,
+    getDeviceRepairOptions,
+    update,
+    getRepairOptionWithDevice
+}
