@@ -10,5 +10,4 @@ router.get('/get/:id', getRepairOptions)
 router.get('/getdeviceoptions/:id', getDeviceRepairOptions)
 router.get('/getrepairdetail/:id', getRepairOptionWithDevice)
 
-
 module.exports = router
