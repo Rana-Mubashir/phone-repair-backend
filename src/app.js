@@ -7,6 +7,7 @@ const seriesRouter=require('./routes/series')
 const deviceRouter=require('./routes/device')
 const repairOptionsRouter =require('./routes/repairOptions')
 const addressRouter = require('./routes/shopAddresses')
+const bookingRouter=require('./routes/booking')
 
 const imageRouter=require('./routes/imageKit')
 
@@ -21,6 +22,7 @@ app.use('/api/series',seriesRouter)
 app.use('/api/device',deviceRouter)
 app.use('/api/repairoptions',repairOptionsRouter)
 app.use('/api/address',addressRouter)
+app.use('/api/booking',bookingRouter)
 
 
 app.use('/', (req, res) => {
