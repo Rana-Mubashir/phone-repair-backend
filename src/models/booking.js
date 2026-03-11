@@ -63,11 +63,14 @@ const bookingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-
     notes: {
       type: String,
     },
-
+    status:{
+      type:String,
+      enum:['pending','completed','rejected','confirmed'],
+      default:'pending'
+    },
     date: {
       type: Date,
       required: true,
@@ -82,6 +85,7 @@ const bookingSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Addresses",
     },
+
   },
   { timestamps: true }
 );
