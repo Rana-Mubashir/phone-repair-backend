@@ -20,8 +20,8 @@ const createBooking = async (req, res) => {
 const getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find()
-      .populate("clinic")
-      .sort({ createdAt: -1 });
+    //   .populate("clinic")
+    //   .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
