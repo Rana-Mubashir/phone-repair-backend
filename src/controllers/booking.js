@@ -1,4 +1,5 @@
 const Booking = require("../models/booking");
+const {sendEmail} = require("../utils/sendEmail")
 
 const createBooking = async (req, res) => {
   try {
@@ -73,7 +74,71 @@ const getBookings = async (req, res) => {
   }
 };
 
+const updateStatus = async (req,res) => {
+  try {
+
+    const {id} = req.params
+    const {status} = req.body
+
+    if(!id || !status){
+      return res.status(400).json({
+        message:"Id and status must be required!"
+      })
+    }
+
+    const repair = await Booking.findById(id)
+
+    repair.status=status
+
+    await repair.save()
+
+    return res.status(200).json({
+      message:"Booking status updated!"
+    })
+
+  } catch (error) {
+    return res.status(500).json({
+      message:"Internal server error",
+      error:error.message
+    })
+  }
+}
+
+const bookingEmail =  async (req, res) => {
+  try {
+    const { subject, body } = req.body;
+    const { id } = req.params;
+
+    const booking = await Booking.findById(id);
+
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    await sendEmail({
+      to: booking.email,
+      subject,
+      html: body.replace(/\n/g, "<br/>")
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Email sent successfully"
+    });
+
+  } catch (error) {
+    console.error("Email error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to send email"
+    });
+  }
+}
+
+
 module.exports = {
   createBooking,
   getBookings,
+  updateStatus,
+  bookingEmail
 };
