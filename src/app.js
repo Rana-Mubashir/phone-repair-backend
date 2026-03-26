@@ -8,7 +8,7 @@ const deviceRouter=require('./routes/device')
 const repairOptionsRouter =require('./routes/repairOptions')
 const addressRouter = require('./routes/shopAddresses')
 const bookingRouter=require('./routes/booking')
-
+const chatRouter = require('./routes/chat')
 
 const imageRouter=require('./routes/imageKit')
 const userRouter = require('./routes/users')
@@ -26,6 +26,7 @@ app.use('/api/repairoptions',repairOptionsRouter)
 app.use('/api/address',addressRouter)
 app.use('/api/booking',bookingRouter)
 app.use('/api/user',userRouter)
+app.use('/api/chat',chatRouter)
 
 app.use('/', (req, res) => {
     return res.status(200).json({
