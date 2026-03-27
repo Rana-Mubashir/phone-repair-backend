@@ -1,4 +1,4 @@
-const app = require('./app')
+const {app,server} = require('./app')
 const dotenv = require('dotenv')
 const connectDb = require('./db/db')
 
@@ -6,7 +6,7 @@ dotenv.config()
 
 connectDb()
     .then(() =>
-        app.listen(process.env.PORT, () => {
+        server.listen(process.env.PORT, () => {
             console.log(`app listenting at port ${process.env.PORT}`)
         })
     )
