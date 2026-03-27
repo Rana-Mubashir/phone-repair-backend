@@ -70,4 +70,29 @@ const getChatMessages = async (req, res) => {
     }
 }
 
-module.exports = { addNewMessage, getChatMessages }
+const getChats = async (req, res) => {
+    try {
+
+        const chats = await Chats.find()
+
+        if(!chats || chats.length ===0){
+            return res.status(200).json({
+                message:"No chats found",
+                chats:[]
+            })
+        }
+
+        return res.status(200).json({
+            message:"Chats Fetched!",
+            chats
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            message: "Internal server error!",
+            error: error.message
+        })
+    }
+}
+
+module.exports = { addNewMessage, getChatMessages, getChats }
