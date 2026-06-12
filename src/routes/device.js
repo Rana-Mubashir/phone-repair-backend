@@ -1,5 +1,5 @@
 const express = require('express')
-const { create, getAll, remove, getDeviceByBrand, getAllDevicesName } = require('../controllers/Device')
+const { create, getAll, remove, getDeviceByBrand, getAllDevicesName } = require('../controllers/device')
 
 const router = express.Router()
 

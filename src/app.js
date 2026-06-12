@@ -17,7 +17,20 @@ const { Server } = require("socket.io");
 
 const app = express()
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3030",
+      "http://localhost:5173",
+      "https://phone-repair-site-three.vercel.app",
+      "https://phone-repair-dashboard.vercel.app",
+      "https://www.phone-repair-site-three.vercel.app",
+      "https://www.phone-repair-dashboard.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 const server = http.createServer(app);
